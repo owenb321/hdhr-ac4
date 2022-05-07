@@ -60,7 +60,7 @@
 ## Run Docker container
 >Example container run command:
 
->`docker run -p 80:80 -p 5004:5004 -e HDHR_IP=192.168.1.108 -e HOST_IP=192.168.1.109 -e DEVICEID_SWAP=1 hdhr-ac4`
+>`docker run -p 80:80 -p 5004:5004 -e HDHR_IP=192.168.1.108 -e HOST_IP=192.168.1.109 -e DEVICEID_SWAP=1 owenb321/hdhr-ac4`
 
 >The HDHomerun API being implemented is here: https://info.hdhomerun.com/info/http_api 
 
