@@ -585,4 +585,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY *.py ./
 
+ENV HDHR_IP=192.168.1.108 \
+    HOST_IP=192.168.1.245 \
+    DEVICEID_SWAP=0
+
 CMD [ "python3", "./main.py" ]

@@ -1,4 +1,5 @@
 """main file tha launches fastapi and created hdhr instance"""
+import os
 from typing import Any, List
 from fastapi import FastAPI, Request
 from fastapi.exceptions import HTTPException
@@ -12,13 +13,13 @@ import re
 
 # TODO: move to config file?
 # You must configure tese two parameters for your network
-HDHR_IP = "192.168.1.161"
-HOST_IP = "192.168.1.253"
+HDHR_IP = os.environ['HDHR_IP']
+HOST_IP = os.environ['HOST_IP']
 
 # These config options are optionl
 # Set to 1 to reverse the DeviceID of the original HDHR.
 # This is needed for some systems like PLEX that track the DeviceID
-DeviceID_swap = 0
+DeviceID_swap = os.environ['DEVICEID_SWAP']
 
 # End config options, changes below this line are not required
 
