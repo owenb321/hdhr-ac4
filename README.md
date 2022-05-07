@@ -15,11 +15,11 @@
 >This allows my HDHR5-4K to serve ATSC 3.0 programs to my Emby server with Live TV and DVR functionality. Converting audio to AC3 before Emby receives it (or other clients) allows everything to work as it always has with HDHomerun tuners.
 
 ## Configuration 
->Currently hardcoded in the Python scripts.
->### main.py
+>Configuration is handled via environment variables
+>
 >>- HDHR_IP - the IP address of your real HDHomerun device
 >>- HOST_IP - the IP address where hdhr-ac4 is running
->>- DeviceID_swap - If the Device of the HDHomerun you are connecting to should be reversed. This ensures you have a unique DeviceID to prevent any collision with your physical HDHomerun device.
+>>- DEVICEID_SWAP - Set to `1` if the Device of the HDHomerun you are connecting to should be reversed. This ensures you have a unique DeviceID to prevent any collision with your physical HDHomerun device. Default is `0`
 
 >### hd_home_run.py
 >>Contains the ffmpeg command:
@@ -34,6 +34,8 @@
     "pipe:",
     "-c:a",
     "ac3",
+    "-af",
+    "channelmap=0|1|4|5|2|3:5.1(side)",
     "-c:v",
     "copy",
     "-f",
@@ -58,7 +60,7 @@
 ## Run Docker container
 >Example container run command:
 
->`docker run -p 80:80 -p 5004:5004 hdhr-ac4`
+>`docker run -p 80:80 -p 5004:5004 -e HDHR_IP=192.168.1.108 -e HOST_IP=192.168.1.109 -e DEVICEID_SWAP=1 hdhr-ac4`
 
 >The HDHomerun API being implemented is here: https://info.hdhomerun.com/info/http_api 
 
@@ -82,7 +84,6 @@
 ## TODO
 >- Add version and a version API
 >- Strip all the unused stuff from the ffmpeg build
->- Pull configuration stuff out of Python files to a file/argument/webAPI
 >- Improve the complex streaming data pipe
 
 
